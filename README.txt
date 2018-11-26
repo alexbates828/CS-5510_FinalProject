@@ -1,0 +1,1 @@
+This repo was created to house all the work done for the final project in my Fall 2018 class, Introduction to Informatics (CS:5110) with Dr. Padmini Srinivasan. This repo was uploaded to GitHub with Dr. Srinivasan's permission. 
