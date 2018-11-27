@@ -1,10 +1,5 @@
 '''
-Alexander J. Bates
-Final Project -- IGPI:5110
-December 6, 2018
-'''
 
-'''
 project stub
 
 State any assumptions you make here. Note these should not contradict
@@ -18,10 +13,6 @@ you may want to get a head start and look at:
 http://www.tutorialspoint.com/python/python_reg_expressions.htm
 
 '''
-
-import os
-# import nltk #not yet
-from string import punctuation as punct
 
 
 class Poems(object):
@@ -56,22 +47,6 @@ class Poems(object):
     -----Discuss strategy-----
     
     '''
-    _allPoems = []
-    _curPoemId = 1
-    def __init__(self,
-                 title,
-                 author,
-                 text
-                 ):
-        self.poemId = Poems._curPoemId
-        Poems._curpoemID += 1
-        Poems._allPoems.append(self)
-        
-        pass
-
-    def __lt__(self, other):
-        return self.sentiment < other.sentiment
-        # this one is actually complete, provided we get sentiment right. 
     
 class Nouns(object):
     '''
@@ -89,29 +64,7 @@ class Nouns(object):
 
     '''
 
-    _curNounId = 1
-    def __init__(self, noun):
-        self.nounId = Nouns._curNounId
-        Nouns._curNounId += 1
-        self.noun = noun
-        pass
+    
 
-def wordtrain(train):
-    if len(train)>=100:
-        return train
-    else:
-        pass # fill in later. Function must be recursive.
 
-def Problem5(mystr):
-    i = (len(mystr) >= 7 and len(mystr) < 10)
-    ii = any([p in mystr for p in punct])
-    iii = mystr.lower() != mystr
-    iv = any([mystr in poem.words for poem in Poems._allPoems])
-    return (i and ii and iii and iv)
-    # be sure to test this one. 
-
-cwd = os.getcwd()
-poemsfile = cwd + '\\Poems_new_2018.txt'
-with open(poemsfile, 'r') as myPoems:
-    #print myPoems.read()
-    pass
+    
