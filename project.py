@@ -19,10 +19,16 @@ http://www.tutorialspoint.com/python/python_reg_expressions.htm
 
 '''
 
-import os
-# import nltk #not yet
-from string import punctuation as punct
 
+import re
+import os
+
+# Modules needed later in Poems and Nouns classes.
+from string import punctuation as punct
+# import nltk # Used for SentiWordNet
+from nltk.corpus import sentiwordnet as swn
+# from testSentiWordNet import estimate_sentiment
+# from contractions import CONTRACTION_MAP
 
 class Poems(object):
     '''
@@ -54,6 +60,8 @@ class Poems(object):
     close to the original format as possible. Input to this method is a poemId
     
     -----Discuss strategy-----
+
+    # Does the self.text attribute count the title - author line? 
     
     '''
     _allPoems = []
@@ -66,9 +74,19 @@ class Poems(object):
         self.poemId = Poems._curPoemId
         Poems._curpoemID += 1
         Poems._allPoems.append(self)
-        
+        self.title = title # revisit? 
+        self.author = author # revisit?
+        self.text = text # Does the self.text attribute count the title - author line?
+        self.numberLines = None # revisit.
+        self.words = None # revisit.
+        self.nouns = None # revisit.
+        self.sentiment = None # revisit. 
         pass
 
+    def getfrequency(self, word):
+        return self.words[word] ''' Will work, provided self.words is a
+                                    dictionary of the form { word:freq }.'''
+    
     def __lt__(self, other):
         return self.sentiment < other.sentiment
         # this one is actually complete, provided we get sentiment right. 
@@ -89,11 +107,22 @@ class Nouns(object):
 
     '''
 
+    _allNouns = {}
     _curNounId = 1
     def __init__(self, noun):
-        self.nounId = Nouns._curNounId
-        Nouns._curNounId += 1
+        # Note that nouns must be non-trivial. 
+        # need self.synset first. 
         self.noun = noun
+        if self.noun not in Nouns._allNouns:
+            self.nounId = Nouns._curNounId
+            Nouns._curNounId +=1
+            Nouns._allNouns[self.noun] = self.nounId
+        else:
+            self.nounId = Nouns._allNouns[self.noun]
+        self.synset = None # Revisit. 
+        self.definition = None # Revisit.
+        self.frequency = None # Revisit.
+        self.pidlist = None # Revisit.
         pass
 
 def wordtrain(train):
@@ -107,7 +136,7 @@ def Problem5(mystr):
     ii = any([p in mystr for p in punct])
     iii = mystr.lower() != mystr
     iv = any([mystr in poem.words for poem in Poems._allPoems])
-    return (i and ii and iii and iv)
+    return all([i, ii, iii, iv])
     # be sure to test this one. 
 
 cwd = os.getcwd()
