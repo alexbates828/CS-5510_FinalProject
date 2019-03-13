@@ -5,8 +5,8 @@ Sentiment analysis using SentiWordNet
 import nltk
 from nltk.corpus import sentiwordnet as swn
 
-sentence = '''This is a really horrible movie
-'''
+#sentence = '''This is a really horrible movie
+#'''
 
 
 import pandas as pd
@@ -22,7 +22,7 @@ def estimate_sentiment(sentence, verbose = False):
     final_sentiment = 0
     ##print tagged_words
     for word, tag in tagged_words:
-        print (word, tag)
+        # print (word, tag)
         ss_set = None
         ## show
         ## swn.senti_synsets('loved', 'v')
@@ -48,7 +48,7 @@ def estimate_sentiment(sentence, verbose = False):
         
 
         if ss_set:
-            print ('word', ss_set, ss_set.pos_score(), ss_set.neg_score(), ss_set.obj_score())
+            #print ('word', ss_set, ss_set.pos_score(), ss_set.neg_score(), ss_set.obj_score())
 
             # add scores for all found synsets
             pos_score += ss_set.pos_score()
@@ -79,10 +79,10 @@ def estimate_sentiment(sentence, verbose = False):
                                                                       ['PredictedSentiment', 'Objectivity',
                                                                        'Positive', 'Negative', 'Overall']], 
                                                               labels=[[0,0,0,0,0],[0,1,2,3,4]]))
-        print ( sentiment_frame)
+        # print ( sentiment_frame)
     
     return final_sentiment, norm_final_score
                 
     
-decision, score = estimate_sentiment(sentence, False)
+# decision, score = estimate_sentiment(sentence, False)
 
